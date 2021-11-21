@@ -1,0 +1,20 @@
+// Abstracts
+@use '../abstracts/' as *;
+
+/* Buttons */
+#randomizer {
+    width: 90vw;
+    @include breakpoint-min(ss-var($breakpoints, "768")) {
+        width: 600px;
+    }
+    margin: 2em 0;
+    align-self: center;
+}
+#download {
+    height: 50px;
+    border-radius: 5px;
+    background: ss-var($colors, "primary", "blue");
+    color: white;
+    cursor: pointer;
+    font-size: 2rem;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<head prefix="og: http://ogp.me/ns#">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title & Description -->
+    <title>Planificateur de sujets de veille</title>
+    <meta name="description" content="Planificateur de sujets de veille avec tirage au sort aléatoire des étudiants et selection de date de départ des présentations.">
+
+    <!-- Favicon -->
+    <!-- <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"> -->
+
+    <!-- Google Fonts Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- JS -->
+    <!-- <script src="js/app.js" defer></script> -->
+    <script src="js/app.js" type="module" defer></script>
+</head>
+
+<body>
+    <!-- Planner -->
+    <section class="planner">
+        <h1 class="planner__title ss-container ss-align-center">Planificateur de sujets de veille</h1>
+        <!-- Planner steps visualisation -->
+        <div class="planner__steps">
+            <div id="step-1" class="planner__steps__number ss-circle ss-grid-center active">1</div>
+            <div id="step-2" class="planner__steps__number ss-circle ss-grid-center">2</div>
+            <div id="step-3" class="planner__steps__number ss-circle ss-grid-center">3</div>
+            <div id="step-4" class="planner__steps__number ss-circle ss-grid-center">4</div>
+            <div id="step-5" class="planner__steps__number ss-circle ss-grid-center">5</div>
+            <!-- Planner steps progress bar -->
+            <div class="planner__steps__progressbar"></div>
+            <div class="planner__steps__progressbg"></div>
+        </div>
+
+        <!-- Planner slider of the steps -->
+        <div class="planner__slider">
+            <!-- Step 1: Specify number of students or import list from csv file -->
+            <div class="planner__slider__content">
+                <form class="planner__slider__content__form" id="number-form">
+                    <label class="form-label" for="number">Spécifiez le nombre d'étudiants:</label>
+                    <input type="number" id="number" class="form-input ss-align-center ss-shadow-1" min="1" max="50">
+                    <span class="input-error ss-align-center" id="number-error"></span>
+                    <button id="number-confirm" class="form-button">Confirmer</button>
+                </form>
+                <hr>
+                <form class="planner__slider__content__form" id="file-form">
+                    <label class="form-label" for="csv-upload">Ou importer la liste d'étudiants:</label>
+                    <div class="custom-file ss-align-center ss-shadow-1">
+                        <input type="file" id="csv-upload" class="custom-file-input" accept=".csv" hidden>
+                        <button type="button" class="custom-file-button">Choisir un fichier</button>
+                        <span class="custom-file-text">Aucun fichier choisi</span>
+                    </div>
+                    <span>*le fichier doit être sous format ".csv" avec "nom,prénom" comme colonnes.</span>
+                    <button id="file-confirm" class="form-button">Confirmer</button>
+                </form>
+            </div>
+
+            <!-- Step 2: Manually add students name and subject or the subjet only if the list was imported -->
+            <div class="planner__slider__content">
+                <form class="planner__slider__content__form" id="student-form">
+                    <h2 class="ss-align-center">Nombre d'étudiants restant: <span class="student-number"></span></h2>
+                    <label class="form-label" for="nom">Nom</label>
+                    <input type="text" id="nom" class="form-input ss-shadow-1">
+                    <label class="form-label" for="prenom">Prénom</label>
+                    <input type="text" id="prenom" class="form-input ss-shadow-1">
+                    <label class="form-label" for="sujet">Sujet</label>
+                    <input type="text" id="sujet" class="form-input ss-shadow-1">
+                    <span class="input-error ss-align-center" id="submit-error"></span>
+                    <button class="submit form-button">Ajouter</button>
+                </form>
+            </div>
+
+            <!-- Step 3: Pick the starting date -->
+            <div class="planner__slider__content">
+                <form class="planner__slider__content__form" id="date-form">
+                    <label class="form-label">Veuillez choisir la date de début du planning:</label>
+                    <input type="date" name="date" id="date" class="form-input ss-shadow-1">
+                    <span class="input-error ss-align-center" id="date-error"></span>
+                    <div class="planning-dates">
+                        <h2 class="ss-align-center">Date du début: <span class="date-planned" id="date-begin"></span></h2>
+                        <h2 class="ss-align-center">Date de fin: <span class="date-planned" id="date-end"></span></h2>
+                    </div>
+                    <button id="date-confirm" class="form-button">Confirmer</button>
+                    <span class="input-error ss-align-center" id="confirm-date-error"></span>
+                </form>
+            </div>
+
+            <!-- Step 4: Random picker -->
+            <div class="planner__slider__content">
+                <form class="planner__slider__content__form">
+                    <h2 class="ss-align-center">Tirage au sort:</h2>
+                    <button class="form-button" id="randomizer">Choisir étudiant</button>
+                    <h2 class="result ss-align-center"></h2>
+                    <button id="confirm-random" class="form-button">Confirmer</button>
+                    <span class="input-error ss-align-center" id="confirm-random-error"></span>
+                </form>
+            </div>
+
+            <!-- Step 5: Preview the list of students in a table format and download as csv -->
+            <div class="planner__slider__content">
+                <h2 class="ss-align-center">Aperçu du tableau des étudiant choisis:</h2>
+                <div class="table-container">
+                    <table id="students-table">
+                        <thead>
+                            <tr>
+                                <th>Ordre de passage</th>
+                                <th>Nom et prénom</th>
+                                <th>Sujet de veille</th>
+                                <th>Date de passage</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <button id="download">Télécharger</button>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>

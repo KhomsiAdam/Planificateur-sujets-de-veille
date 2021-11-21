@@ -1,0 +1,67 @@
+// Abstracts
+@use "../abstracts/" as *;
+
+/* Tables */
+.table-container {
+    overflow-y: auto;
+    margin-bottom: 2em;
+    @include breakpoint-min(ss-var($breakpoints, "768")) {
+        width: 105%;
+        overflow-x: hidden;
+        /* Scrollbar Styling : Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: ss-var($colors, "primary", "blue") ss-var($colors, "secondary", "darkblue");
+        /* Scrollbar Styling for Webkit browsers */
+        &::-webkit-scrollbar {
+            width: 3rem;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: ss-var($colors, "primary", "blue");
+            border: 10px solid ss-var($colors, "neutral", "lightgray");
+            border-radius: 30px;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: ss-var($colors, "primary", "blue");
+        }
+    }
+}
+#students-table {
+    margin: 2em 0;
+    width: 750px;
+    @include breakpoint-min(ss-var($breakpoints, "768")) {
+        width: 100%;
+    }
+    td {
+        text-align: center;
+    }
+    text-align: center;
+    font-size: 1.6rem;
+    border-collapse: collapse;
+    thead {
+        background: #d9d9d9;
+        font-weight: 700;
+        tr {
+            th {
+                width: 25%;
+                height: 50px;
+            }
+        }
+    }
+    tbody {
+        tr:nth-child(even) {
+            background: #e6e6e6;
+        }
+        tr:nth-child(odd) {
+            background: #f8f5f5;
+        }
+        tr {
+            td {
+                width: 25%;
+                height: 50px;
+            }
+        }
+    }
+}

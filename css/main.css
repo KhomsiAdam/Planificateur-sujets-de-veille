@@ -1,0 +1,743 @@
+/* ====== */
+/* Resets */
+/* ====== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+/* ========= */
+/* Font Face */
+/* ========= */
+/* ========== */
+/* Typography */
+/* ========== */
+/* Standart mobile first typography */
+h1 {
+  font-size: 3.2rem;
+}
+
+h2 {
+  font-size: 2.6rem;
+}
+
+h3 {
+  font-size: 2.2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+p,
+span,
+strong,
+label,
+a,
+li {
+  font-size: 1.6rem;
+}
+
+/* Mobile typography fixes for small screens: 320px ~ 360px */
+@media only screen and (min-width: 320px) and (max-width: 360px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.6rem;
+  }
+
+  p,
+span,
+strong,
+label,
+a,
+li {
+    font-size: 1.4rem;
+  }
+}
+/* Tablet typography: 768px+ */
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 3.2rem;
+  }
+
+  h2 {
+    font-size: 2.6rem;
+  }
+
+  h3 {
+    font-size: 2.2rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  p,
+span,
+strong,
+label,
+a,
+li {
+    font-size: 1.6rem;
+  }
+}
+/* Tablet typography: 1024px+ */
+@media only screen and (min-width: 1024px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 3.2rem;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  p,
+span,
+strong,
+label,
+a,
+li {
+    font-size: 1.6rem;
+  }
+}
+/* Computer typography: 1280px+ */
+@media only screen and (min-width: 1280px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 3.2rem;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  p,
+span,
+strong,
+label,
+a,
+li {
+    font-size: 1.6rem;
+  }
+}
+/* Computer typography: 1440px+ */
+@media only screen and (min-width: 1440px) {
+  h1 {
+    font-size: 4.4rem;
+  }
+
+  h2 {
+    font-size: 3.4rem;
+  }
+
+  h3 {
+    font-size: 2.6rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  p,
+span,
+strong,
+label,
+a,
+li {
+    font-size: 1.6rem;
+  }
+}
+/* Computer typography: 1920px+ */
+@media only screen and (min-width: 1920px) {
+  h1 {
+    font-size: 4.8rem;
+  }
+
+  h2 {
+    font-size: 3.6rem;
+  }
+
+  h3 {
+    font-size: 2.8rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+
+  p,
+span,
+strong,
+label,
+a,
+li {
+    font-size: 1.6rem;
+  }
+}
+/* Computer typography: 2560px+ */
+@media only screen and (min-width: 2560px) {
+  h1 {
+    font-size: 4.8rem;
+  }
+
+  h2 {
+    font-size: 3.8rem;
+  }
+
+  h3 {
+    font-size: 3rem;
+  }
+
+  h4 {
+    font-size: 2rem;
+  }
+
+  p,
+span,
+strong,
+label,
+a,
+li {
+    font-size: 1.8rem;
+  }
+}
+html {
+  box-sizing: border-box;
+  /* Font family */
+  font-family: "Poppins", "sans-serif";
+  /* To make rem units easier to work with (1rem = 10px) */
+  font-size: 62.5%;
+  /* Scrollbar Styling : Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #2b777d #2b365a;
+  /* Scrollbar Styling for Webkit browsers */
+}
+html::-webkit-scrollbar {
+  width: 3rem;
+}
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb {
+  background: #2b777d;
+  border: 10px solid #f7f7f7;
+  border-radius: 30px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: #2b777d;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Uncomment if custom outline is planned for each element needed */
+/* :focus {
+     outline: none;
+}*/
+/* Links decoration */
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Remove default list styling */
+ul,
+ol {
+  list-style: none;
+}
+
+body {
+  min-height: 100vh;
+  background: #f7f7f7;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ========== */
+/* Utilities */
+/* ========== */
+/* Container */
+.ss-container {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1920px;
+}
+@media only screen and (min-width: 768) {
+  .ss-container {
+    width: 85%;
+  }
+}
+@media only screen and (min-width: 1024) {
+  .ss-container {
+    width: 70%;
+  }
+}
+
+/* Video container */
+.ss-video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Text Alignement */
+/* Left */
+.ss-align-left {
+  text-align: left;
+}
+
+/* Right */
+.ss-align-right {
+  text-align: right;
+}
+
+/* Center */
+.ss-align-center {
+  text-align: center;
+}
+
+/* General Alignement */
+/* Flex */
+.ss-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ss-flex-v-center {
+  display: flex;
+  align-items: center;
+}
+
+.ss-flex-h-center {
+  display: flex;
+  justify-content: center;
+}
+
+/* Grid */
+.ss-grid-center {
+  display: grid;
+  place-content: center;
+}
+
+/* To round elements as a circle */
+.ss-circle {
+  border-radius: 50%;
+}
+
+/* Scale transition animation */
+.ss-scale-transition {
+  transition: transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63);
+}
+
+/* Box shadows */
+.ss-shadow-1 {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ss-shadow-2 {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.07), 0 1px 10px 0 rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+.ss-shadow-3 {
+  box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.07), 0 3px 14px 2px rgba(0, 0, 0, 0.06), 0 5px 5px -3px rgba(0, 0, 0, 0.1);
+}
+
+.ss-shadow-4 {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.07), 0 6px 30px 5px rgba(0, 0, 0, 0.06), 0 8px 10px -7px rgba(0, 0, 0, 0.1);
+}
+
+.ss-shadow-5 {
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.07), 0 9px 46px 8px rgba(0, 0, 0, 0.06), 0 11px 15px -7px rgba(0, 0, 0, 0.1);
+}
+
+/* Prevent content from wrapping and forcing it into single line with ellipsis at the end */
+.ss-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Removing default appearance */
+.ss-no-appearance {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Prevent scrolling while the navigation menu is open */
+.ss-prevent-scroll {
+  overflow: hidden;
+}
+
+/* Overlay */
+.ss-overlay {
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 15;
+  opacity: 0.8;
+  display: none;
+}
+
+.ss-overlay.active {
+  display: block;
+}
+
+/* Table with spacing inside only */
+.ss-table-inspacing td {
+  border: 0px solid transparent;
+  background-clip: padding-box;
+}
+.ss-table-inspacing tr > td + td {
+  border-left-width: 5px;
+}
+.ss-table-inspacing tr > td {
+  border-top-width: 5px;
+}
+
+/* Buttons */
+#randomizer {
+  width: 90vw;
+  margin: 2em 0;
+  align-self: center;
+}
+@media only screen and (min-width: 768px) {
+  #randomizer {
+    width: 600px;
+  }
+}
+
+#download {
+  height: 50px;
+  border-radius: 5px;
+  background: #2b777d;
+  color: white;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+/* Custom file input */
+.custom-file {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: calc(50px + 4em);
+  border-radius: 5px;
+  background: white;
+  color: #2b777d;
+  padding: 1em;
+  gap: 1em;
+}
+@media only screen and (min-width: 768px) {
+  .custom-file {
+    flex-direction: row;
+    height: calc(50px + 2em);
+  }
+}
+.custom-file .custom-file-input {
+  display: none;
+}
+.custom-file .custom-file-button,
+.custom-file .custom-file-text {
+  width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .custom-file .custom-file-button,
+.custom-file .custom-file-text {
+    width: 50%;
+  }
+}
+.custom-file .custom-file-button {
+  height: 50px;
+  border-radius: 5px;
+  background: #2b777d;
+  color: white;
+  cursor: pointer;
+}
+.custom-file .custom-file-text.error {
+  color: #c94242;
+}
+
+/* Forms */
+.form-label {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.form-input {
+  height: 50px;
+  padding: 0 1em;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.form-input:focus {
+  outline: 2px solid #2b777d;
+}
+
+.form-input.error {
+  outline: 2px solid #c94242;
+}
+
+.form-button {
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  background: #2b777d;
+  color: white;
+  cursor: pointer;
+}
+
+.student-number {
+  font-size: inherit;
+  color: #2b777d;
+}
+
+/* Tables */
+.table-container {
+  overflow-y: auto;
+  margin-bottom: 2em;
+}
+@media only screen and (min-width: 768px) {
+  .table-container {
+    width: 105%;
+    overflow-x: hidden;
+    /* Scrollbar Styling : Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #2b777d #2b365a;
+    /* Scrollbar Styling for Webkit browsers */
+  }
+  .table-container::-webkit-scrollbar {
+    width: 3rem;
+  }
+  .table-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .table-container::-webkit-scrollbar-thumb {
+    background: #2b777d;
+    border: 10px solid #f7f7f7;
+    border-radius: 30px;
+  }
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background: #2b777d;
+  }
+}
+
+#students-table {
+  margin: 2em 0;
+  width: 750px;
+  text-align: center;
+  font-size: 1.6rem;
+  border-collapse: collapse;
+}
+@media only screen and (min-width: 768px) {
+  #students-table {
+    width: 100%;
+  }
+}
+#students-table td {
+  text-align: center;
+}
+#students-table thead {
+  background: #d9d9d9;
+  font-weight: 700;
+}
+#students-table thead tr th {
+  width: 25%;
+  height: 50px;
+}
+#students-table tbody tr:nth-child(even) {
+  background: #e6e6e6;
+}
+#students-table tbody tr:nth-child(odd) {
+  background: #f8f5f5;
+}
+#students-table tbody tr td {
+  width: 25%;
+  height: 50px;
+}
+
+/* ========== */
+/* Components */
+/* ========== */
+/* ======== */
+/* Main CSS */
+/* ======== */
+.planner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100vh;
+  padding: 5em 0;
+  gap: 5em;
+}
+@media only screen and (max-width: 360px) {
+  .planner {
+    padding: 2em 0;
+    gap: 2em;
+  }
+}
+.planner__title {
+  align-self: center;
+}
+.planner__steps {
+  display: flex;
+  width: 90%;
+  place-self: center;
+  justify-content: space-between;
+  position: relative;
+}
+@media only screen and (min-width: 768px) {
+  .planner__steps {
+    width: 600px;
+  }
+}
+.planner__steps__number {
+  width: 50px;
+  height: 50px;
+  background: #ffffff;
+  border: 2px solid #2b777d;
+  color: #2b777d;
+  font-weight: 700;
+  font-size: 2rem;
+  z-index: 1;
+}
+.planner__steps__number.active {
+  background: #2b777d;
+  transition: background 0.5s linear;
+  color: white;
+}
+.planner__steps__progressbar {
+  position: absolute;
+  inset: 50%;
+  transform: translate(0%, -50%);
+  left: 0;
+  width: 0%;
+  transition: width 0.5s linear;
+  height: 15%;
+  background: #2b777d;
+}
+.planner__steps__progressbar.step-2 {
+  width: 25%;
+}
+.planner__steps__progressbar.step-3 {
+  width: 50%;
+}
+.planner__steps__progressbar.step-4 {
+  width: 75%;
+}
+.planner__steps__progressbar.step-5 {
+  width: 100%;
+}
+.planner__steps__progressbg {
+  position: absolute;
+  inset: 50%;
+  transform: translate(0%, -50%);
+  left: 0;
+  height: 15%;
+  width: 100%;
+  background: transparent;
+  border: 2px solid #2b777d;
+}
+.planner__slider {
+  display: flex;
+  transition: transform 300ms linear;
+  overflow: hidden;
+}
+.planner__slider__content {
+  width: 100vw;
+  display: grid;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0 2em;
+}
+@media only screen and (min-width: 768px) {
+  .planner__slider__content {
+    place-content: center;
+  }
+}
+.planner__slider__content__form {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  gap: 1em;
+  font-size: 2rem;
+}
+@media only screen and (min-width: 768px) {
+  .planner__slider__content__form {
+    width: 600px;
+  }
+}
+
+.planning-dates {
+  padding: 1em 0;
+  display: grid;
+  gap: 2em;
+}
+.planning-dates .date-planned {
+  font-size: inherit;
+  color: #2b777d;
+}
+
+.input-error {
+  color: #c94242;
+  font-weight: 500;
+}
+
+.result {
+  margin-bottom: 1em;
+}
+
+hr {
+  height: 3px;
+  border-radius: 5px;
+  background: #2b777d;
+  margin: 4em 0;
+}/*# sourceMappingURL=main.css.map */

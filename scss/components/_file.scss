@@ -1,0 +1,39 @@
+// Abstracts
+@use '../abstracts/' as *;
+
+/* Custom file input */
+.custom-file {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: calc(50px + 4em);
+    @include breakpoint-min(ss-var($breakpoints, "768")) {
+        flex-direction: row;
+        height: calc(50px + 2em);
+    }
+    border-radius: 5px;
+    background: white;
+    color: ss-var($colors, "primary", "blue");
+    padding: 1em;
+    gap: 1em;
+    .custom-file-input {
+        display: none;
+    }
+    .custom-file-button,
+    .custom-file-text {
+        @include breakpoint-min(ss-var($breakpoints, "768")) {
+            width: 50%;
+        }
+        width: 100%;
+    }
+    .custom-file-button {
+        height: 50px;
+        border-radius: 5px;
+        background: ss-var($colors, "primary", "blue");
+        color: white;
+        cursor: pointer;
+    }
+    .custom-file-text.error {
+        color: ss-var($colors, "secondary", "red");
+    }
+}

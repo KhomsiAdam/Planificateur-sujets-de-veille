@@ -1,0 +1,83 @@
+// Abstracts
+@use '../abstracts/' as *;
+
+/* ====== */
+/* Resets */
+/* ====== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+html {
+    box-sizing: border-box;
+    /* Font family */
+    font-family: $font-name, $font-serif;
+    /* To make rem units easier to work with (1rem = 10px) */
+    font-size: 62.5%;
+    /* Scrollbar Styling : Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: ss-var($colors, "primary", "blue") ss-var($colors, "secondary", "darkblue");
+    /* Scrollbar Styling for Webkit browsers */
+    &::-webkit-scrollbar {
+        width: 3rem;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: ss-var($colors, "primary", "blue");
+        border: 10px solid ss-var($colors, "neutral", "lightgray");
+        border-radius: 30px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: ss-var($colors, "primary", "blue");
+    }
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Uncomment if custom outline is planned for each element needed */
+/* :focus {
+     outline: none;
+}*/
+
+/* Links decoration */
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* Remove default list styling */
+ul,
+ol {
+    list-style: none;
+}
+
+body {
+    min-height: 100vh;
+    background: ss-var($colors, "neutral", "lightgray");
+    // text-rendering: optimizeSpeed;
+    // line-height: 1.5;
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}

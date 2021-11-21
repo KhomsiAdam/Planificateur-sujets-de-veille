@@ -1,0 +1,32 @@
+// Abstracts
+@use '../abstracts/' as *;
+
+/* Forms */
+.form-label {
+    font-size: 2rem;
+    font-weight: ss-var($font-weight, "medium");
+}
+.form-input {
+    height: 50px;
+    padding: 0 1em;
+    border-radius: 5px;
+    font-weight: ss-var($font-weight, "semibold");
+    &:focus {
+        outline: 2px solid ss-var($colors, "primary", "blue");
+    }
+}
+.form-input.error {
+    outline: 2px solid ss-var($colors, "secondary", "red");
+}
+.form-button {
+    height: 50px;
+    width: 100%;
+    border-radius: 5px;
+    background: ss-var($colors, "primary", "blue");
+    color: white;
+    cursor: pointer;
+}
+.student-number {
+    font-size: inherit;
+    color: ss-var($colors, "primary", "blue");
+}
