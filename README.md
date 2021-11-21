@@ -1,5 +1,7 @@
 # Planificateur de sujets de veille
 
+Aperçu de l'application: https://planificateur-sujets-de-veille.netlify.app/
+
 Le nombre d'étudiants est soit spécifié soit définit à partir d'une liste fournie sous format `.csv` (nom,prénom).
 
 ![planificateur-1](https://user-images.githubusercontent.com/9354045/142780462-be444443-50e4-4efc-b2b5-9511bc5dd303.png)
