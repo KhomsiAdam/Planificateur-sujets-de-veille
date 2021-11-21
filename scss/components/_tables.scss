@@ -3,7 +3,7 @@
 
 /* Tables */
 .table-container {
-    overflow-y: auto;
+    overflow-y: scroll;
     margin-bottom: 2em;
     @include breakpoint-min(ss-var($breakpoints, "768")) {
         width: 105%;
