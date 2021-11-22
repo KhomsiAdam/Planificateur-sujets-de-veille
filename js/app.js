@@ -38,6 +38,15 @@ let number_of_students;
 // false: students informations was entered manually, true: students list was uploaded
 let file_uploaded = false;
 
+// If an entry already exists in the students array
+let entry_exists = false;
+
+// For validation of entries in the imported csv file
+let valid_entries = true;
+
+// For duplicate entries in the imported csv file
+let duplicate_exists = false;
+
 // Student name and subject inputs
 const nom = document.getElementById('nom');
 const prenom = document.getElementById('prenom');
@@ -46,6 +55,15 @@ const sujet = document.getElementById('sujet');
 // ========= //
 // Functions //
 // ========= //
+
+// Regular expression for inputs
+function regexInputs(value) {
+    return value.match(/[^\w\s]/gi, "") ? false : true;
+}
+// Regular expression for csv file
+function regexCsv(value) {
+    return value.match(/[^\w\s(\-).,]/gi, "") ? false : true;
+}
 
 // Handling csv file upload
 function handleFiles(file) {
@@ -80,6 +98,8 @@ function errorHandler(e) {
 
 // Process the csv file
 function processData(csv) {
+    // Initialize the valid entries to true
+    valid_entries = true;
     // Initialize the uploaded list of students array
     uploaded_students = [];
     // Split the lines as rows into array
@@ -90,24 +110,61 @@ function processData(csv) {
         let student_entry = [];
         // Push the separated fullname into an array
         for (let j = 0; j < student_fullname.length; j++) {
-            student_entry.push(student_fullname[j]);
+            // Check for valid names
+            if (regexCsv(student_fullname[j])) {
+                student_entry.push(student_fullname[j]);
+            } else {
+                // Set the valid entries to false
+                valid_entries = false;
+                document.querySelector('.custom-file-text').innerHTML = 'Des charactères non valides sont présent dans le fichier.';
+                document.querySelector('.custom-file-text').classList.add('error');
+                // Clear the file input, number of students an the uploaded list of students
+                document.querySelector('.custom-file-input').value = '';
+                number_of_students = '';
+                document.querySelector('.student-number').innerHTML = number_of_students;
+                uploaded_students = [];
+                // Enable the names inputs
+                nom.disabled = false;
+                prenom.disabled = false;
+                // Clear the name inputs
+                nom.value = '';
+                prenom.value = '';
+                // Set the upload status to false
+                file_uploaded = false;
+            }
         }
         // Push the student entry with both firstname and lastname into the list of students uploaded from the file
-        uploaded_students.push(student_entry);
+        if (valid_entries == true) {
+            // When the array is empty push the first entry
+            if (uploaded_students.length === 0) {
+                uploaded_students.push(student_entry);
+            // Then verify each entry if it already exists, skip it
+            } else {
+                for (let i = 0; i < uploaded_students.length; i++) {
+                    if (uploaded_students[i][0] !== student_entry[0] && uploaded_students[i][1] !== student_entry[1]) {
+                        duplicate_entry = false;
+                    } else {
+                        duplicate_entry = true;
+                    }
+                }
+                if (duplicate_entry == false) uploaded_students.push(student_entry);
+            }
+        }
     }
-    // Change the file upload to be true
-    file_uploaded = true;
-    // Set the number of students
-    number_of_students = uploaded_students.length - 1;
-    // Show the total number of students
-    document.querySelector('.student-number').innerHTML = number_of_students;
-    // Disable the names inputs
-    nom.disabled = true;
-    prenom.disabled = true;
-    // Change the names input values to the first student in the uploaded list
-    nom.value = uploaded_students[student_index][0];
-    prenom.value = uploaded_students[student_index][1];
-
+    if (valid_entries == true) {
+        // Change the file upload to be true
+        file_uploaded = true;
+        // Set the number of students
+        number_of_students = uploaded_students.length - 1;
+        // Show the total number of students
+        document.querySelector('.student-number').innerHTML = number_of_students;
+        // Disable the names inputs
+        nom.disabled = true;
+        prenom.disabled = true;
+        // Change the names input values to the first student in the uploaded list
+        nom.value = uploaded_students[student_index][0];
+        prenom.value = uploaded_students[student_index][1];
+    }
 }
 
 // Get the name of the day to ignore weekends
@@ -184,8 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let translate_previous = -translate_init;
     // Max value beyond the last slide
     let translate_max = slider_container.childElementCount * translate_init;
-    // Set slider width depending on how many slides
-    slider_container.style.width = slider_container.childElementCount * 100 + '%';
     /* Slider functions */
     // Slide right
     function slideRight() {
@@ -331,6 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Submitting student names and subject
     document.querySelector('.submit').addEventListener('click', (e) => {
         e.preventDefault();
+        entry_exists = false;
         // Check if inputs are not empty
         if (nom.value !== '' && prenom.value !== '' && sujet.value !== '') {
             document.getElementById('submit-error').innerHTML = '';
@@ -338,69 +394,128 @@ document.addEventListener('DOMContentLoaded', () => {
             if (file_uploaded == false) {
                 // As long as there is still students left
                 if (number_of_students > 0) {
-                    // Setup a student object with firstname, lastname and subject
-                    let student_obj = {
-                        order: '',
-                        name: nom.value + ' ' + prenom.value,
-                        subject: sujet.value,
-                        date: ''
+                    // If there is entries in the students array
+                    if (students.length > 0) {
+                        // Check if a name or subject already exists
+                        for (let i = 0; i < students.length; i++) {
+                            if (nom.value + ' ' + prenom.value == students[i].name) {
+                                document.getElementById('submit-error').innerHTML = 'Cet étudiant existe déjà.';
+                                unfocusFormElements();
+                                nom.classList.add('error');
+                                prenom.classList.add('error');
+                                entry_exists = true;
+                            } else if (sujet.value == students[i].subject) {
+                                document.getElementById('submit-error').innerHTML = 'Ce sujet a déjà été affecté.';
+                                unfocusFormElements();
+                                sujet.classList.add('error');
+                                entry_exists = true;
+                            }
+                        }
                     }
-                    // Push the student object entry in the students array
-                    students.push(student_obj);
-                    // Reset the form
-                    document.getElementById('student-form').reset();
-                    // Focus the lastname input
-                    nom.focus();
-                    // Decrement the number of student
-                    number_of_students -= 1;
-                    // Update the visualisation of the number of students
-                    document.querySelector('.student-number').innerHTML = number_of_students;
-                    // After submitting the last student
-                    if (number_of_students == 0) {
-                        // Unfocus all inputs and buttons
-                        unfocusFormElements();
-                        // Slide right then progress to step 3
-                        slideRight();
-                        document.querySelector('.planner__steps__progressbar').classList.add('step-3');
-                        document.getElementById('step-3').classList.add('active');
+                    if (entry_exists != true) {
+                        // Check for special characters
+                        if (regexInputs(nom.value) && regexInputs(prenom.value) && regexInputs(sujet.value)) {
+                            // Setup a student object with firstname, lastname and subject
+                            let student_obj = {
+                                order: '',
+                                name: nom.value + ' ' + prenom.value,
+                                subject: sujet.value,
+                                date: ''
+                            }
+                            // Push the student object entry in the students array
+                            students.push(student_obj);
+                            // Reset the form
+                            document.getElementById('student-form').reset();
+                            // Focus the lastname input
+                            nom.focus();
+                            // Decrement the number of student
+                            number_of_students -= 1;
+                            // Update the visualisation of the number of students
+                            document.querySelector('.student-number').innerHTML = number_of_students;
+                            // After submitting the last student
+                            if (number_of_students == 0) {
+                                // Unfocus all inputs and buttons
+                                unfocusFormElements();
+                                // Slide right then progress to step 3
+                                slideRight();
+                                document.querySelector('.planner__steps__progressbar').classList.add('step-3');
+                                document.getElementById('step-3').classList.add('active');
+                            }
+                        } else {
+                            unfocusFormElements();
+                            if (!regexInputs(nom.value)) {
+                                nom.classList.add('error');
+                            }
+                            if (!regexInputs(prenom.value)) {
+                                prenom.classList.add('error');
+                            }
+                            if (!regexInputs(sujet.value)) {
+                                sujet.classList.add('error');
+                            }
+                            document.getElementById('submit-error').innerHTML = 'Veuillez entrer des charactères valides.';
+                        }
                     }
                 }
                 // When the students names are uploaded fom a csv file
             } else {
                 // As long as the student index is lower than the uploaded students list length
                 if (student_index < uploaded_students.length) {
-                    // Setup a student object with firstname, lastname and subject
-                    let student_obj = {
-                        order: '',
-                        name: nom.value + ' ' + prenom.value,
-                        subject: sujet.value,
-                        date: ''
+                    // If there is entries in the students array
+                    if (students.length > 0) {
+                        // Check if a name or subject already exists
+                        for (let i = 0; i < students.length; i++) {
+                            if (sujet.value == students[i].subject) {
+                                document.getElementById('submit-error').innerHTML = 'Ce sujet a déjà été affecté.';
+                                unfocusFormElements();
+                                sujet.classList.add('error');
+                                entry_exists = true;
+                            }
+                        }
                     }
-                    // Push the student object entry in the students array
-                    students.push(student_obj);
-                    // Decrement the number of student
-                    number_of_students -= 1;
-                    // Update the visualisation of the number of students
-                    document.querySelector('.student-number').innerHTML = number_of_students;
-                    // Focus the subject input and clear it
-                    sujet.focus();
-                    sujet.value = '';
-                    // Increment the student index
-                    student_index += 1;
-                    // Put the name of the next student in the name inputs as long as the student index is lower than the uploaded students list length
-                    if (student_index < uploaded_students.length) {
-                        nom.value = uploaded_students[student_index][0];
-                        prenom.value = uploaded_students[student_index][1];
+                    if (entry_exists != true) {
+                        // Check for special characters
+                        if (regexInputs(nom.value) && regexInputs(prenom.value) && regexInputs(sujet.value)) {
+
+                            // Setup a student object with firstname, lastname and subject
+                            let student_obj = {
+                                order: '',
+                                name: nom.value + ' ' + prenom.value,
+                                subject: sujet.value,
+                                date: ''
+                            }
+                            // Push the student object entry in the students array
+                            students.push(student_obj);
+                            // Decrement the number of student
+                            number_of_students -= 1;
+                            // Update the visualisation of the number of students
+                            document.querySelector('.student-number').innerHTML = number_of_students;
+                            // Focus the subject input and clear it
+                            sujet.focus();
+                            sujet.value = '';
+                            // Increment the student index
+                            student_index += 1;
+                            // Put the name of the next student in the name inputs as long as the student index is lower than the uploaded students list length
+                            if (student_index < uploaded_students.length) {
+                                nom.value = uploaded_students[student_index][0];
+                                prenom.value = uploaded_students[student_index][1];
+                            }
+                            // After submitting the last student
+                            if (number_of_students == 0) {
+                                // Unfocus all inputs and buttons
+                                unfocusFormElements();
+                                // Slide right then progress to step 3
+                                slideRight();
+                                document.querySelector('.planner__steps__progressbar').classList.add('step-3');
+                                document.getElementById('step-3').classList.add('active');
+                            }
+                        } else {
+                            unfocusFormElements();
+                            if (!regexInputs(sujet.value)) {
+                                sujet.classList.add('error');
+                            }
+                            document.getElementById('submit-error').innerHTML = 'Veuillez entrer des charactères valides.';
+                        }
                     }
-                }
-                // After submitting the last student
-                if (number_of_students == 0) {
-                    // Unfocus all inputs and buttons
-                    unfocusFormElements();
-                    // Slide right then progress to step 3
-                    slideRight();
-                    document.querySelector('.planner__steps__progressbar').classList.add('step-3');
-                    document.getElementById('step-3').classList.add('active');
                 }
             }
         } else {
@@ -473,10 +588,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show the starting and ending date of the planning
             document.getElementById('date-begin').innerHTML = starting_date;
             document.getElementById('date-end').innerHTML = ending_date;
+            document.getElementById('date-confirm').classList.remove('disabled');
+            document.getElementById('date-confirm').disabled = false;
             // When the selected day is a "Saturday" or "Sunday", show an error message
         } else {
             document.getElementById('date-error').innerHTML = 'Veuillez choisir une date valide (le jour ne doit pas être un Samedi ou un Dimanche).';
             date_input.classList.add('error');
+            document.getElementById('date-confirm').classList.add('disabled');
+            document.getElementById('date-confirm').disabled = true;
         }
     })
     // Confirm date selection and progress to step 4
@@ -561,4 +680,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Any code that needs to run after the document fully loads with all the assets
 window.addEventListener('load', () => {
+    // Show the planner after the document fully loads
+    document.querySelector('.planner').classList.remove('hidden');
+    // Activate the animation for the steps numbers
+    document.querySelectorAll('.planner__steps__number').forEach(steps_number => {
+        steps_number.classList.add('animated');
+    });
 })
