@@ -533,6 +533,11 @@ select {
   cursor: pointer;
 }
 
+.form-button.disabled {
+  opacity: 0.5;
+  cursor: unset;
+}
+
 .student-number {
   font-size: inherit;
   color: #2b777d;
@@ -609,6 +614,8 @@ select {
 /* Main CSS */
 /* ======== */
 .planner {
+  opacity: 1;
+  transition: opacity 0.5s linear;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -650,8 +657,10 @@ select {
 }
 .planner__steps__number.active {
   background: #2b777d;
-  transition: background 0.5s linear;
   color: white;
+}
+.planner__steps__number.animated {
+  transition: background 0.5s linear;
 }
 .planner__steps__progressbar {
   position: absolute;
@@ -686,8 +695,9 @@ select {
   border: 2px solid #2b777d;
 }
 .planner__slider {
+  width: 500%;
   display: flex;
-  transition: transform 300ms linear;
+  transition: transform 0.3s linear;
   overflow: hidden;
 }
 .planner__slider__content {
@@ -714,6 +724,12 @@ select {
   .planner__slider__content__form {
     width: 600px;
   }
+}
+
+.planner.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.5s linear;
 }
 
 .planning-dates {

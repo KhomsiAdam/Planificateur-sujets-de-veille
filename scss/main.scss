@@ -13,6 +13,8 @@
 
 // Planner
 .planner {
+    opacity: 1;
+    transition: opacity .5s linear;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -52,8 +54,10 @@
         }
         &__number.active {
             background: ss-var($colors, "primary", "blue");
-            transition: background 0.5s linear;
             color: white;
+        }
+        &__number.animated {
+            transition: background .5s linear;
         }
         // Steps Progress bar
         &__progressbar {
@@ -62,7 +66,7 @@
             transform: translate(0%, -50%);
             left: 0;
             width: 0%;
-            transition: width 0.5s linear;
+            transition: width .5s linear;
             height: 15%;
             background: ss-var($colors, "primary", "blue");
         }
@@ -91,8 +95,9 @@
     }
     // Slider
     &__slider {
+        width: 500%;
         display: flex;
-        transition: transform 300ms linear;
+        transition: transform .3s linear;
         overflow: hidden;
         // Content
         &__content {
@@ -118,6 +123,11 @@
             }
         }
     }
+}
+.planner.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility .5s linear;
 }
 // Begin and End date
 .planning-dates {
