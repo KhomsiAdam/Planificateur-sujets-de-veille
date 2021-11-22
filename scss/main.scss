@@ -14,7 +14,7 @@
 // Planner
 .planner {
     opacity: 1;
-    transition: opacity .5s linear;
+    transition: opacity 0.5s linear;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -57,7 +57,7 @@
             color: white;
         }
         &__number.animated {
-            transition: background .5s linear;
+            transition: background 0.5s linear;
         }
         // Steps Progress bar
         &__progressbar {
@@ -66,7 +66,7 @@
             transform: translate(0%, -50%);
             left: 0;
             width: 0%;
-            transition: width .5s linear;
+            transition: width 0.5s linear;
             height: 15%;
             background: ss-var($colors, "primary", "blue");
         }
@@ -97,7 +97,7 @@
     &__slider {
         width: 500%;
         display: flex;
-        transition: transform .3s linear;
+        transition: transform 0.3s linear;
         overflow: hidden;
         // Content
         &__content {
@@ -106,10 +106,28 @@
             justify-content: center;
             overflow-x: hidden;
             overflow-y: auto;
-            @include breakpoint-min(ss-var($breakpoints, "768")) {
+            @include breakpoint-min(ss-var($breakpoints, "1920")) {
                 place-content: center;
             }
             padding: 0 2em;
+            /* Scrollbar Styling : Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: ss-var($colors, "primary", "blue") ss-var($colors, "secondary", "darkblue");
+            /* Scrollbar Styling for Webkit browsers */
+            &::-webkit-scrollbar {
+                width: 3rem;
+            }
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: ss-var($colors, "primary", "blue");
+                border: 10px solid ss-var($colors, "neutral", "lightgray");
+                border-radius: 30px;
+            }
+            &::-webkit-scrollbar-thumb:hover {
+                background: ss-var($colors, "primary", "blue");
+            }
             // Form
             &__form {
                 display: flex;
@@ -127,7 +145,7 @@
 .planner.hidden {
     opacity: 0;
     visibility: hidden;
-    transition: visibility .5s linear;
+    transition: visibility 0.5s linear;
 }
 // Begin and End date
 .planning-dates {
