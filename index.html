@@ -23,13 +23,12 @@
     <link rel="stylesheet" href="css/main.css">
 
     <!-- JS -->
-    <!-- <script src="js/app.js" defer></script> -->
-    <script src="js/app.js" type="module" defer></script>
+    <script src="js/app.js" defer></script>
 </head>
 
 <body>
     <!-- Planner -->
-    <section class="planner">
+    <section class="planner hidden">
         <h1 class="planner__title ss-container ss-align-center">Planificateur de sujets de veille</h1>
         <!-- Planner steps visualisation -->
         <div class="planner__steps">
@@ -91,7 +90,7 @@
                         <h2 class="ss-align-center">Date du début: <span class="date-planned" id="date-begin"></span></h2>
                         <h2 class="ss-align-center">Date de fin: <span class="date-planned" id="date-end"></span></h2>
                     </div>
-                    <button id="date-confirm" class="form-button">Confirmer</button>
+                    <button id="date-confirm" class="form-button disabled" disabled>Confirmer</button>
                     <span class="input-error ss-align-center" id="confirm-date-error"></span>
                 </form>
             </div>
