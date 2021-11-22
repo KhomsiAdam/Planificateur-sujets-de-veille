@@ -26,6 +26,10 @@
     color: white;
     cursor: pointer;
 }
+.form-button.disabled {
+    opacity: .5;
+    cursor: unset;
+}
 .student-number {
     font-size: inherit;
     color: ss-var($colors, "primary", "blue");
