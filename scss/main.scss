@@ -110,23 +110,25 @@
                 place-content: center;
             }
             padding: 0 2em;
-            /* Scrollbar Styling : Firefox */
-            scrollbar-width: thin;
-            scrollbar-color: ss-var($colors, "primary", "blue") ss-var($colors, "secondary", "darkblue");
-            /* Scrollbar Styling for Webkit browsers */
-            &::-webkit-scrollbar {
-                width: 3rem;
-            }
-            &::-webkit-scrollbar-track {
-                background: transparent;
-            }
-            &::-webkit-scrollbar-thumb {
-                background: ss-var($colors, "primary", "blue");
-                border: 10px solid ss-var($colors, "neutral", "lightgray");
-                border-radius: 30px;
-            }
-            &::-webkit-scrollbar-thumb:hover {
-                background: ss-var($colors, "primary", "blue");
+            @include breakpoint-min(ss-var($breakpoints, "1280")) {
+                /* Scrollbar Styling : Firefox */
+                scrollbar-width: thin;
+                scrollbar-color: ss-var($colors, "primary", "blue") ss-var($colors, "secondary", "darkblue");
+                /* Scrollbar Styling for Webkit browsers */
+                &::-webkit-scrollbar {
+                    width: 3rem;
+                }
+                &::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: ss-var($colors, "primary", "blue");
+                    border: 10px solid ss-var($colors, "neutral", "lightgray");
+                    border-radius: 30px;
+                }
+                &::-webkit-scrollbar-thumb:hover {
+                    background: ss-var($colors, "primary", "blue");
+                }
             }
             // Form
             &__form {

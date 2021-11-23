@@ -707,29 +707,33 @@ select {
   overflow-x: hidden;
   overflow-y: auto;
   padding: 0 2em;
-  /* Scrollbar Styling : Firefox */
-  scrollbar-width: thin;
-  scrollbar-color: #2b777d #2b365a;
-  /* Scrollbar Styling for Webkit browsers */
 }
 @media only screen and (min-width: 1920px) {
   .planner__slider__content {
     place-content: center;
   }
 }
-.planner__slider__content::-webkit-scrollbar {
-  width: 3rem;
-}
-.planner__slider__content::-webkit-scrollbar-track {
-  background: transparent;
-}
-.planner__slider__content::-webkit-scrollbar-thumb {
-  background: #2b777d;
-  border: 10px solid #f7f7f7;
-  border-radius: 30px;
-}
-.planner__slider__content::-webkit-scrollbar-thumb:hover {
-  background: #2b777d;
+@media only screen and (min-width: 1280px) {
+  .planner__slider__content {
+    /* Scrollbar Styling : Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #2b777d #2b365a;
+    /* Scrollbar Styling for Webkit browsers */
+  }
+  .planner__slider__content::-webkit-scrollbar {
+    width: 3rem;
+  }
+  .planner__slider__content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .planner__slider__content::-webkit-scrollbar-thumb {
+    background: #2b777d;
+    border: 10px solid #f7f7f7;
+    border-radius: 30px;
+  }
+  .planner__slider__content::-webkit-scrollbar-thumb:hover {
+    background: #2b777d;
+  }
 }
 .planner__slider__content__form {
   display: flex;
