@@ -58,7 +58,7 @@ const sujet = document.getElementById('sujet');
 
 // Regular expression for inputs
 function regexInputs(value) {
-    return value.match(/[^\w\s]/gi, "") ? false : true;
+    return value.match(/[^\w\s(\-).]/gi, "") ? false : true;
 }
 // Regular expression for csv file
 function regexCsv(value) {
