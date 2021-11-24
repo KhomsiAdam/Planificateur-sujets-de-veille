@@ -16,7 +16,7 @@ let students = [];
 let uploaded_students = [];
 
 // First student in uploaded list
-let student_index = 1;
+let student_index = 0;
 
 // Ordered final list of student
 let ordered_students = [];
@@ -45,7 +45,7 @@ let entry_exists = false;
 let valid_entries = true;
 
 // For duplicate entries in the imported csv file
-let duplicate_exists = false;
+let duplicate_entry = false;
 
 // Student name and subject inputs
 const nom = document.getElementById('nom');
@@ -141,10 +141,10 @@ function processData(csv) {
             // Then verify each entry if it already exists, skip it
             } else {
                 for (let i = 0; i < uploaded_students.length; i++) {
-                    if (uploaded_students[i][0] !== student_entry[0] && uploaded_students[i][1] !== student_entry[1]) {
-                        duplicate_entry = false;
-                    } else {
+                    if (uploaded_students[i][0] == student_entry[0] && uploaded_students[i][1] == student_entry[1]) {
                         duplicate_entry = true;
+                    } else {
+                        duplicate_entry = false;
                     }
                 }
                 if (duplicate_entry == false) uploaded_students.push(student_entry);
@@ -155,7 +155,7 @@ function processData(csv) {
         // Change the file upload to be true
         file_uploaded = true;
         // Set the number of students
-        number_of_students = uploaded_students.length - 1;
+        number_of_students = uploaded_students.length;
         // Show the total number of students
         document.querySelector('.student-number').innerHTML = number_of_students;
         // Disable the names inputs
